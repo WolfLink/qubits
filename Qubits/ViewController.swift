@@ -44,6 +44,9 @@ class ViewController: UIViewController, CircuitComponentDelegate {
     
     func addNewComponent(_ component: CircuitComponent) {
         self.view.addSubview(component)
+        if let tool = toolbar {
+            self.view.bringSubview(toFront: tool)
+        }
     }
     func moveComponent(_ component: CircuitComponent, to touch: UITouch, offset: CGPoint) {
         let point = touch.location(in: self.view)

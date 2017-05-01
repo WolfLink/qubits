@@ -35,9 +35,23 @@ class CircuitToolbar: UIView {
     }
     
     func loadData() {
+        scrollView.backgroundColor = UIColor.clear
+        
+        if UIAccessibilityIsReduceTransparencyEnabled() {
+            self.backgroundColor = UIColor.darkGray
+        }
+        else {
+            self.backgroundColor = UIColor.clear
+            let blur = UIBlurEffect(style: UIBlurEffectStyle.dark)
+            let blurView = UIVisualEffectView(effect: blur)
+            blurView.frame = self.bounds
+            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            addSubview(blurView)
+            sendSubview(toBack: blurView)
+        }
+        
         let length = self.frame.height - 10
         scrollView.frame = CGRect(origin: CGPoint.zero, size: self.frame.size)
-        scrollView.backgroundColor = UIColor.red
         self.addSubview(scrollView)
         var currentX: CGFloat = 5
         var totalLength: CGFloat = 5
@@ -52,15 +66,10 @@ class CircuitToolbar: UIView {
                 currentX += length + 5
                 totalLength += length + 5
                 scrollView.addSubview(component)
-                component.drawMode = CircuitComponent.DrawMode.unselected
+                component.drawMode = .unselected
             }
         }
         contentSize = CGSize(width: totalLength, height: self.frame.size.height)
         scrollView.contentSize = contentSize
     }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        NSLog("touched: \(touches)")
-    }
-
 }
