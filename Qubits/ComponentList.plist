@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>Qubit</string>
+		<key>label</key>
+		<string>Q</string>
+		<key>qubits</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Hadamard</string>
+		<key>label</key>
+		<string>H</string>
+		<key>qubits</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Controlled Not</string>
+		<key>label</key>
+		<string>CNOT</string>
+		<key>qubits</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Pauli-X</string>
+		<key>label</key>
+		<string>X</string>
+		<key>qubits</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Pauli-Y</string>
+		<key>label</key>
+		<string>Y</string>
+		<key>qubits</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Pauli-Z</string>
+		<key>label</key>
+		<string>Z</string>
+		<key>qubits</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Controlled Swap</string>
+		<key>label</key>
+		<string>CSWAP</string>
+		<key>qubits</key>
+		<integer>2</integer>
+	</dict>
+</array>
+</plist>
