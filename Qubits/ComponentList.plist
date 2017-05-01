@@ -3,6 +3,8 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>type</key>
+		<string>input</string>
 		<key>name</key>
 		<string>Qubit</string>
 		<key>label</key>
@@ -11,6 +13,8 @@
 		<integer>1</integer>
 	</dict>
 	<dict>
+		<key>type</key>
+		<string>gate</string>
 		<key>name</key>
 		<string>Hadamard</string>
 		<key>label</key>
@@ -19,6 +23,8 @@
 		<integer>1</integer>
 	</dict>
 	<dict>
+		<key>type</key>
+		<string>gate</string>
 		<key>name</key>
 		<string>Controlled Not</string>
 		<key>label</key>
@@ -27,6 +33,8 @@
 		<integer>2</integer>
 	</dict>
 	<dict>
+		<key>type</key>
+		<string>gate</string>
 		<key>name</key>
 		<string>Pauli-X</string>
 		<key>label</key>
@@ -35,6 +43,8 @@
 		<integer>1</integer>
 	</dict>
 	<dict>
+		<key>type</key>
+		<string>gate</string>
 		<key>name</key>
 		<string>Pauli-Y</string>
 		<key>label</key>
@@ -43,6 +53,8 @@
 		<integer>1</integer>
 	</dict>
 	<dict>
+		<key>type</key>
+		<string>gate</string>
 		<key>name</key>
 		<string>Pauli-Z</string>
 		<key>label</key>
@@ -51,12 +63,24 @@
 		<integer>1</integer>
 	</dict>
 	<dict>
+		<key>type</key>
+		<string>gate</string>
 		<key>name</key>
 		<string>Controlled Swap</string>
 		<key>label</key>
 		<string>CSWAP</string>
 		<key>qubits</key>
 		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>output</string>
+		<key>name</key>
+		<string>Measurement</string>
+		<key>label</key>
+		<string>1/0</string>
+		<key>qubits</key>
+		<integer>1</integer>
 	</dict>
 </array>
 </plist>

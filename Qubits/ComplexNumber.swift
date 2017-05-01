@@ -16,20 +16,27 @@ struct ComplexNumber {
     }
     
     static func * (left: ComplexNumber, right: ComplexNumber) -> ComplexNumber {
-        //implement complex number multiplication
-        return left
+        return ComplexNumber(real: left.real*right.real - left.imaginary*right.imaginary, imaginary: left.real*right.imaginary + left.imaginary*right.real)
+    }
+    
+    static func + (left: ComplexNumber, right: ComplexNumber) -> ComplexNumber {
+        return ComplexNumber(real: left.real + right.real, imaginary: left.imaginary + right.imaginary)
     }
     
     static func / (left: ComplexNumber, right: Double) -> ComplexNumber {
         // implement division of a complex number by a real number
-        return left
+        return ComplexNumber(real: left.real/right, imaginary: left.imaginary/right)
     }
     func conjugate() -> ComplexNumber {
         // implmenet complex conjugate
-        return self
+        return ComplexNumber(real: self.real, imaginary: -self.imaginary)
+        
     }
     func magnitude() -> Double {
         // implement magnitude of a complex number
-        return 0
+        return magSquared().squareRoot()
+    }
+    func magSquared() -> Double {
+        return self.real*self.real + self.imaginary*self.imaginary
     }
 }

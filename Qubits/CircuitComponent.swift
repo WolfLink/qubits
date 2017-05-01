@@ -17,13 +17,14 @@ protocol CircuitComponentDelegate: class {
 
 class CircuitComponent: UIView {
     enum DrawMode {
-        case active, selected, unselected
+        case active, passive
     }
     let label: UILabel = UILabel(frame: CGRect.zero)
     var drawMode: DrawMode = .unselected
     var moving: Bool = false
     static weak var delegate: CircuitComponentDelegate?
     weak var child: CircuitComponent?
+    var links = [CircuitLink]()
     
     convenience init(dictionary dict: NSDictionary) {
         self.init(title: dict.value(forKey: "label") as! String)
@@ -38,8 +39,8 @@ class CircuitComponent: UIView {
         else {
             title = ""
         }
-        
         self.init(title: title, frame: original.frame)
+        self.drawMode = .
     }
     
     init(title text:String, frame rect:CGRect = CGRect.zero) {
