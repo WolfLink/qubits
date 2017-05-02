@@ -28,11 +28,26 @@
                                     <constraint firstAttribute="height" constant="100" id="Bfi-IB-byk"/>
                                 </constraints>
                             </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jnm-Jp-10S">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="FRj-ib-vPz"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Qubits!" id="1Id-Ot-hcE">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="Deh-sZ-yjW"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="9Vg-ac-yCj"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Jnm-Jp-10S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="N1k-XH-peL"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="CAc-FU-ifp" secondAttribute="bottom" id="cWg-Vl-FDD"/>
                             <constraint firstItem="CAc-FU-ifp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="j0a-bi-sYn"/>
+                            <constraint firstItem="Jnm-Jp-10S" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pMo-lu-jr4"/>
+                            <constraint firstAttribute="trailing" secondItem="Jnm-Jp-10S" secondAttribute="trailing" id="pab-R6-yVM"/>
                             <constraint firstAttribute="trailing" secondItem="CAc-FU-ifp" secondAttribute="trailing" id="uri-wN-xR0"/>
                         </constraints>
                     </view>

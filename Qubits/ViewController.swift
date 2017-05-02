@@ -70,7 +70,9 @@ class ViewController: UIViewController, CircuitComponentDelegate {
     }
     func cancelPlacement(component: CircuitComponent) {
         component.removeFromSuperview()
-        blocks.remove(at: blocks.index(of: component))
+        if let index = blocks.index(of: component) {
+            blocks.remove(at: index)
+        }
         toolbar?.scrollView.isScrollEnabled = true
     }
 }

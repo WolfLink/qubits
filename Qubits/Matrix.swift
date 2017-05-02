@@ -12,6 +12,12 @@ struct Matrix {
     init(_ numbers: [[ComplexNumber]]) {
         contents = numbers
     }
+    
+    subscript(row: Int, column: Int) -> ComplexNumber {
+        get {
+            return contents[row][column]
+        }
+    }
 
     static func * (left: Matrix, right: Matrix) -> Matrix {
         //implement matrix-matrix multiplication
@@ -38,8 +44,8 @@ struct Matrix {
     }
 
     //scales all components by factor k
-    func scale(k: Double) -> Matrix {
-      scaled = [[ComplexNumber]]()
+    func scale(k: ComplexNumber) -> Matrix {
+      var scaled = [[ComplexNumber]]()
       for i in 0..<contents.count {
         scaled.append([ComplexNumber]())
         for j in 0..<contents[i].count {
@@ -64,18 +70,19 @@ struct Matrix {
 
       for (i, row) in contents.enumerated() {
         for (j, num) in row.enumerated() {
-          combined[i, j] = num
+          combined[i][j] = num
         }
-        for (j, num) in right.contents[i] {
-          combined[i, j + halfWidth] = num
+        for (j, num) in right.contents[i].enumerated() {
+          combined[i][j + halfWidth] = num
         }
       }
-      return combined
+      return Matrix(combined)
     }
 
     //note: we could make this an operator if you guys come up with a good symbol to represent it.
     func tensor(_ right: Matrix) -> Matrix {
         //implement tensor product between self and right
-        let topL =
+        //let topL =
+        return right
     }
 }
