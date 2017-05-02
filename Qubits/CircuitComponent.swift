@@ -13,9 +13,13 @@ protocol CircuitComponentDelegate: class {
     func addNewComponent(_ component: CircuitComponent)
     func moveComponent(_ component: CircuitComponent, to touch: UITouch, offset: CGPoint)
     func handlePlacement(component: CircuitComponent, at touch: UITouch, offset: CGPoint)
+    func cancelPlacement(component: CircuitComponent)
 }
 
 class CircuitComponent: UIView {
+    
+    let linkRadius: CGFloat = 7
+    
     enum DrawMode {
         case active, passive
     }
@@ -69,12 +73,12 @@ class CircuitComponent: UIView {
             outputs = []
             if type == "input" || type == "gate" {
                 for _ in 0..<qubits {
-                    outputs.append(CircuitLink(radius: 5, owner: self))
+                    outputs.append(CircuitLink(radius: linkRadius, owner: self))
                 }
             }
             if type == "output" || type == "gate" {
                 for _ in 0..<qubits {
-                    inputs.append(CircuitLink(radius: 5, owner: self))
+                    inputs.append(CircuitLink(radius: linkRadius, owner: self))
                 }
             }
         }
@@ -88,10 +92,10 @@ class CircuitComponent: UIView {
         inputs = []
         outputs = []
         for _ in original.inputs {
-            inputs.append(CircuitLink(radius: 5, owner: self))
+            inputs.append(CircuitLink(radius: linkRadius, owner: self))
         }
         for _ in original.outputs {
-            outputs.append(CircuitLink(radius: 5, owner: self))
+            outputs.append(CircuitLink(radius: linkRadius, owner: self))
         }
     }
     

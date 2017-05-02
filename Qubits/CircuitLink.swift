@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol CircuitLinkDelegate: class {
+    func attemptLinkageFrom(_ link: CircuitLink, toTouch touch: UITouch)
+}
+
 class CircuitLink: UIView {
+    static weak var delegate: CircuitLinkDelegate?
+    
     var owner: CircuitComponent
     var selected: Bool = false
     weak var partner: CircuitLink?
@@ -19,6 +25,7 @@ class CircuitLink: UIView {
         self.radius = radius
         self.owner = owner
         super.init(frame: CGRect(x: 0, y: 0, width: radius * 2 + 4, height: radius * 2 + 4))
+        backgroundColor = UIColor.clear
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,7 +43,7 @@ class CircuitLink: UIView {
             context.setFillColor(UIColor.white.cgColor)
             context.fillEllipse(in: rect)
             context.setStrokeColor(UIColor.black.cgColor)
-            context.setLineWidth(2)
+            context.setLineWidth(1.5)
             context.strokeEllipse(in: rect)
         }
     }
@@ -52,6 +59,9 @@ class CircuitLink: UIView {
         }
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if selected, let touch = touches.first {
+            CircuitLink.delegate?.attemptLinkageFrom(self, toTouch: touch)
+        }
         selected = false
     }
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {

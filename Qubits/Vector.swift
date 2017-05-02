@@ -16,7 +16,7 @@ struct Vector {
     func dot(_ other: Vector) -> ComplexNumber {
         //implement the dot product between two vectors
         var pdct = ComplexNumber(real: 0, imaginary: 0)
-        for i in 0...contents.count {
+        for i in 0..<contents.count {
             pdct = pdct + self.contents[i].conjugate()*other.contents[i]
         }
         return pdct
@@ -34,7 +34,7 @@ struct Vector {
         var vec = self.contents
         
         let norm = self.magnitude()
-        for i in 0...contents.count {
+        for i in 0..<contents.count {
             vec[i] = vec[i] / norm
         }
         return Vector(vec)
@@ -43,7 +43,7 @@ struct Vector {
         // implement taking the complex conjugate of a vector
         var vec = self.contents
         
-        for i in 0...contents.count {
+        for i in 0..<contents.count {
             vec[i] = vec[i].conjugate()
         }
         return Vector(vec)

@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, CircuitComponentDelegate {
     @IBOutlet weak var toolbar: CircuitToolbar?
+    var blocks = [CircuitComponent]()
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -31,25 +32,28 @@ class ViewController: UIViewController, CircuitComponentDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    
+    var lastTouch = CGPoint.zero
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        /*for touch in touches {
-            let c = CircuitComponent(title: "Hello World")
-            let location = touch.location(in: view)
-            c.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-            c.center = location
-            view.addSubview(c)
-        }*/
+        lastTouch = centerOfTouches(touches, inView: view)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let currentTouch = centerOfTouches(touches, inView: view)
+        for block in blocks {
+            block.center = CGPoint(x: block.center.x + currentTouch.x - lastTouch.x, y: block.center.y + currentTouch.y - lastTouch.y)
+        }
+        lastTouch = currentTouch
     }
     
     func addNewComponent(_ component: CircuitComponent) {
         self.view.addSubview(component)
+        blocks.append(component)
         if let tool = toolbar {
             self.view.bringSubview(toFront: tool)
         }
     }
     func moveComponent(_ component: CircuitComponent, to touch: UITouch, offset: CGPoint) {
-        let point = touch.location(in: self.view)
+        let point = touch.location(in: view)
         component.frame.origin = CGPoint(x: point.x - offset.x, y: point.y - offset.y)
         toolbar?.scrollView.isScrollEnabled = false
     }
@@ -57,8 +61,16 @@ class ViewController: UIViewController, CircuitComponentDelegate {
         if let tool = toolbar {
             if tool.frame.contains(touch.location(in: self.view)) {
                 component.removeFromSuperview()
+                if let index = blocks.index(of: component) {
+                    blocks.remove(at: index)
+                }
             }
         }
+        toolbar?.scrollView.isScrollEnabled = true
+    }
+    func cancelPlacement(component: CircuitComponent) {
+        component.removeFromSuperview()
+        blocks.remove(at: blocks.index(of: component))
         toolbar?.scrollView.isScrollEnabled = true
     }
 }
