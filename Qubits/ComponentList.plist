@@ -116,29 +116,19 @@
 		<key>type</key>
 		<string>gate</string>
 		<key>name</key>
-		<string>Controlled Swap</string>
+		<string>Swap</string>
 		<key>label</key>
-		<string>CSWAP</string>
+		<string>SWAP</string>
 		<key>qubits</key>
 		<integer>2</integer>
 	</dict>
 	<dict>
 		<key>type</key>
-		<string>gate</string>
+		<string>output</string>
 		<key>name</key>
 		<string>Standard Measurement</string>
 		<key>label</key>
 		<string>1/0</string>
-		<key>qubits</key>
-		<integer>1</integer>
-	</dict>
-	<dict>
-		<key>type</key>
-		<string>gate</string>
-		<key>name</key>
-		<string>Hadamard Measurement</string>
-		<key>label</key>
-		<string>+/-</string>
 		<key>qubits</key>
 		<integer>1</integer>
 	</dict>

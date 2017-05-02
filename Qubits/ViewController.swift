@@ -12,6 +12,21 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
     @IBOutlet weak var toolbar: CircuitToolbar?
     @IBOutlet weak var linker: Linker?
     var blocks = [CircuitComponent]()
+    let simulator: Quantum = Quantum()
+    
+    @IBAction func run() {
+        if !simulator.runSimulation() {
+            simulator.process(components: blocks)
+        }
+    }
+    
+    @IBAction func trash() {
+        blocks = [CircuitComponent]()
+        linker?.links = [CircuitLink]()
+        linker?.selectedLink = nil
+        linker?.selectedPoint = CGPoint.zero
+        simulator.invalidateCache()
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -106,6 +121,7 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
                         linker!.links.remove(at: index)
                     }
                 }
+                simulator.invalidateCache()
             }
         }
         linker?.setNeedsDisplay()
@@ -116,6 +132,7 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
         if let index = blocks.index(of: component) {
             blocks.remove(at: index)
         }
+        simulator.invalidateCache()
         toolbar?.scrollView.isScrollEnabled = true
     }
     
@@ -135,6 +152,7 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
                 if !(linker?.links.contains(zelda))! {
                     linker?.links.append(link)
                 }
+                simulator.invalidateCache()
             }
         }
         linker?.setNeedsDisplay()
@@ -155,6 +173,7 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
                 link.partner = nil
                 p.partner = nil
             }
+            simulator.invalidateCache()
         }
         linker?.setNeedsDisplay()
     }

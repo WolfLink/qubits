@@ -25,6 +25,7 @@ class CircuitComponent: UIView {
     }
     let label: UILabel = UILabel(frame: CGRect.zero)
     let ID: String
+    let type: String
     var moving: Bool = false
     static weak var delegate: CircuitComponentDelegate?
     weak var child: CircuitComponent?
@@ -89,6 +90,7 @@ class CircuitComponent: UIView {
     init(dictionary dict: NSDictionary) {
         //self.init(title: dict.value(forKey: "label") as! String)
         ID = dict.value(forKey: "name") as! String
+        type = dict.value(forKey: "type") as! String
         super.init(frame: CGRect.zero)
         label.text = dict.value(forKey: "label") as? String
         addSubview(label)
@@ -96,11 +98,9 @@ class CircuitComponent: UIView {
             let qubits = dict.value(forKey: "qubits") as! Int
             inputs = []
             outputs = []
-            if type == "input" || type == "gate" {
-                for _ in 0..<qubits {
-                    let output = CircuitLink(radius: linkRadius, owner: self, outputActive: true)
-                    outputs.append(output)
-                }
+            for _ in 0..<qubits {
+                let output = CircuitLink(radius: linkRadius, owner: self, outputActive: true)
+                outputs.append(output)
             }
             if type == "output" || type == "gate" {
                 for _ in 0..<qubits {
@@ -112,6 +112,7 @@ class CircuitComponent: UIView {
     
     init(copy original: CircuitComponent) {
         ID = original.ID
+        type = original.type
         super.init(frame: original.frame)
         label.text = original.label.text
         addSubview(label)

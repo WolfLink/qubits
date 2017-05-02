@@ -57,9 +57,14 @@ struct Matrix {
       }
       return Matrix(scaled)
     }
+    
+    
+    func appendRight(_ right: Matrix) -> Matrix {
+        return Matrix(contents.enumerated().map({$0.1 + right.contents[$0.0]}))
+    }
 
     //appends another matrix to the right of this one and returns it
-    func appendRight(right: Matrix) -> Matrix {
+    /*func appendRight(right: Matrix) -> Matrix {
       if contents.isEmpty {
         return right
       }
@@ -80,7 +85,7 @@ struct Matrix {
         }
       }
       return Matrix(combined)
-    }
+    }*/
 
     //note: we could make this an operator if you guys come up with a good symbol to represent it.
     func tensor(_ right: Matrix) -> Matrix {
