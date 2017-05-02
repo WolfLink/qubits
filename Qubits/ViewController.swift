@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController, CircuitComponentDelegate {
+class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDelegate {
     @IBOutlet weak var toolbar: CircuitToolbar?
+    @IBOutlet weak var linker: Linker?
     var blocks = [CircuitComponent]()
     
     override func viewDidLayoutSubviews() {
@@ -21,10 +22,21 @@ class ViewController: UIViewController, CircuitComponentDelegate {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         CircuitComponent.delegate = self
+        CircuitLink.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if CircuitComponent.delegate as? ViewController == self {
+            CircuitComponent.delegate = nil
+        }
+        if CircuitLink.delegate as? ViewController == self {
+            CircuitLink.delegate = nil
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,10 +55,11 @@ class ViewController: UIViewController, CircuitComponentDelegate {
             block.center = CGPoint(x: block.center.x + currentTouch.x - lastTouch.x, y: block.center.y + currentTouch.y - lastTouch.y)
         }
         lastTouch = currentTouch
+        linker?.setNeedsDisplay()
     }
     
     func addNewComponent(_ component: CircuitComponent) {
-        self.view.addSubview(component)
+        linker?.addSubview(component)
         blocks.append(component)
         if let tool = toolbar {
             self.view.bringSubview(toFront: tool)
@@ -56,6 +69,11 @@ class ViewController: UIViewController, CircuitComponentDelegate {
         let point = touch.location(in: view)
         component.frame.origin = CGPoint(x: point.x - offset.x, y: point.y - offset.y)
         toolbar?.scrollView.isScrollEnabled = false
+        
+        
+        // have the linker redraw since nodes could have moved
+        linker?.setNeedsDisplay()
+       
     }
     func handlePlacement(component: CircuitComponent, at touch: UITouch, offset: CGPoint) {
         if let tool = toolbar {
@@ -74,6 +92,50 @@ class ViewController: UIViewController, CircuitComponentDelegate {
             blocks.remove(at: index)
         }
         toolbar?.scrollView.isScrollEnabled = true
+    }
+    
+    func attemptLinkageFrom(_ link: CircuitLink, toTouch touch: UITouch) {
+        let hit = linker!.hitTest(touch.location(in: view), with: nil)
+        if let zelda = hit as? CircuitLink {
+            if zelda.output != link.output {
+                if let third = zelda.partner {
+                    third.partner = nil
+                    if let index = linker?.links.index(of: third) {
+                        linker?.links.remove(at: index)
+                    }
+                }
+                
+                zelda.partner = link
+                link.partner = zelda
+                if !(linker?.links.contains(zelda))! {
+                    linker?.links.append(link)
+                }
+            }
+        }
+        linker?.setNeedsDisplay()
+    }
+    func draggedFrom(_ link: CircuitLink, toTouch touch: UITouch) {
+        if link.selected  {
+            linker?.selectedLink = link
+            linker?.selectedPoint = touch.location(in: view)
+            if let p = link.partner {
+                // unlink the two so they can be re-linked
+                if let index = linker?.links.index(of: link) {
+                    linker?.links.remove(at: index)
+                }
+                else if let index = linker?.links.index(of: p) {
+                    linker?.links.remove(at: index)
+                }
+                
+                link.partner = nil
+                p.partner = nil
+            }
+        }
+        linker?.setNeedsDisplay()
+    }
+    func stopDragFrom(_ link: CircuitLink, atTouch touch: UITouch) {
+        linker?.selectedLink = nil
+        linker?.setNeedsDisplay()
     }
 }
 

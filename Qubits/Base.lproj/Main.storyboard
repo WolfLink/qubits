@@ -21,6 +21,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arS-m6-X1e" customClass="Linker" customModule="Qubits" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CAc-FU-ifp" customClass="CircuitToolbar" customModule="Qubits" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="567" width="375" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -44,14 +48,19 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Jnm-Jp-10S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="N1k-XH-peL"/>
+                            <constraint firstAttribute="trailing" secondItem="arS-m6-X1e" secondAttribute="trailing" id="Slf-88-psJ"/>
+                            <constraint firstItem="arS-m6-X1e" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="aF8-GO-adF"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="CAc-FU-ifp" secondAttribute="bottom" id="cWg-Vl-FDD"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="arS-m6-X1e" secondAttribute="bottom" id="gVj-4D-QQJ"/>
                             <constraint firstItem="CAc-FU-ifp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="j0a-bi-sYn"/>
+                            <constraint firstItem="arS-m6-X1e" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="oy4-8E-ftv"/>
                             <constraint firstItem="Jnm-Jp-10S" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pMo-lu-jr4"/>
                             <constraint firstAttribute="trailing" secondItem="Jnm-Jp-10S" secondAttribute="trailing" id="pab-R6-yVM"/>
                             <constraint firstAttribute="trailing" secondItem="CAc-FU-ifp" secondAttribute="trailing" id="uri-wN-xR0"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="linker" destination="arS-m6-X1e" id="8jh-vO-7ZF"/>
                         <outlet property="toolbar" destination="CAc-FU-ifp" id="rgo-YH-Hve"/>
                     </connections>
                 </viewController>

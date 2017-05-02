@@ -18,7 +18,7 @@ protocol CircuitComponentDelegate: class {
 
 class CircuitComponent: UIView {
     
-    let linkRadius: CGFloat = 7
+    let linkRadius: CGFloat = 25
     
     enum DrawMode {
         case active, passive
@@ -42,6 +42,29 @@ class CircuitComponent: UIView {
                 }
             }
             else {
+                if inputs.count == 2 {
+                    inputs[0].center = CGPoint(x: 0, y: frame.height)
+                    inputs[1].center = CGPoint(x: 0, y: 0)
+                }
+                else if inputs.count == 1 {
+                    inputs[0].center = CGPoint(x: 0, y: frame.height / 2)
+                }
+                if outputs.count == 2 {
+                    outputs[0].center = CGPoint(x: frame.width, y: frame.height)
+                    outputs[1].center = CGPoint(x: frame.width, y: 0)
+                }
+                else if outputs.count == 1 {
+                    outputs[0].center = CGPoint(x: frame.width, y: frame.height / 2)
+                }
+                
+                for v in inputs {
+                    addSubview(v)
+                }
+                for v in outputs {
+                    addSubview(v)
+                }
+                
+                /*
                 let inputOffset = self.frame.height / CGFloat(inputs.count + 1)
                 for i in 0..<inputs.count {
                     let offset = inputOffset * CGFloat(i + 1)
@@ -54,6 +77,7 @@ class CircuitComponent: UIView {
                     outputs[i].center = CGPoint(x: frame.size.width, y: offset)
                     addSubview(outputs[i])
                 }
+                */
             }
         }
     }
@@ -73,12 +97,13 @@ class CircuitComponent: UIView {
             outputs = []
             if type == "input" || type == "gate" {
                 for _ in 0..<qubits {
-                    outputs.append(CircuitLink(radius: linkRadius, owner: self))
+                    let output = CircuitLink(radius: linkRadius, owner: self, outputActive: true)
+                    outputs.append(output)
                 }
             }
             if type == "output" || type == "gate" {
                 for _ in 0..<qubits {
-                    inputs.append(CircuitLink(radius: linkRadius, owner: self))
+                    inputs.append(CircuitLink(radius: linkRadius, owner: self, outputActive: false))
                 }
             }
         }
@@ -92,10 +117,10 @@ class CircuitComponent: UIView {
         inputs = []
         outputs = []
         for _ in original.inputs {
-            inputs.append(CircuitLink(radius: linkRadius, owner: self))
+            inputs.append(CircuitLink(radius: linkRadius, owner: self, outputActive: false))
         }
         for _ in original.outputs {
-            outputs.append(CircuitLink(radius: linkRadius, owner: self))
+            outputs.append(CircuitLink(radius: linkRadius, owner: self, outputActive: true))
         }
     }
     
@@ -136,6 +161,10 @@ class CircuitComponent: UIView {
         if touches.count == 1 {
             let touch = touches.first
             if let point = touch?.location(in: self) {
+                if let _ = hitTest(point, with: nil) as? CircuitLink {
+                    super.next?.touchesMoved(touches, with: event)
+                }
+                
                 if moving && drawMode == DrawMode.active {
                     CircuitComponent.delegate?.moveComponent(self, to: touch!, offset: startPoint)
                 }

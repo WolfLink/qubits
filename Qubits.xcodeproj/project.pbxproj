@@ -10,6 +10,7 @@
 		6E0E70A21EB6758A00BC8FC4 /* ComplexNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0E70A11EB6758A00BC8FC4 /* ComplexNumber.swift */; };
 		6E0E70A41EB677D100BC8FC4 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0E70A31EB677D100BC8FC4 /* Vector.swift */; };
 		6E0E70A61EB6790600BC8FC4 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0E70A51EB6790600BC8FC4 /* Matrix.swift */; };
+		6E207AC81EB859530031CDE3 /* Linker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E207AC71EB859530031CDE3 /* Linker.swift */; };
 		6E3AA15B1E88B67B0059E628 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3AA15A1E88B67B0059E628 /* AppDelegate.swift */; };
 		6E3AA15D1E88B67B0059E628 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3AA15C1E88B67B0059E628 /* ViewController.swift */; };
 		6E3AA1601E88B67B0059E628 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3AA15E1E88B67B0059E628 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		6E0E70A11EB6758A00BC8FC4 /* ComplexNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexNumber.swift; sourceTree = "<group>"; };
 		6E0E70A31EB677D100BC8FC4 /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		6E0E70A51EB6790600BC8FC4 /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
+		6E207AC71EB859530031CDE3 /* Linker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Linker.swift; sourceTree = "<group>"; };
 		6E3AA1571E88B67B0059E628 /* Qubits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qubits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E3AA15A1E88B67B0059E628 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E3AA15C1E88B67B0059E628 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				6E3AA16C1E88B69D0059E628 /* CircuitComponent.swift */,
 				6E704BE11E8DA4E800A1953C /* CircuitToolbar.swift */,
 				6E704BE31E8DA62A00A1953C /* ComponentList.plist */,
+				6E207AC71EB859530031CDE3 /* Linker.swift */,
 			);
 			name = "Circuit GUI";
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			files = (
 				6EEADFD21EB805090074023B /* Convenience.swift in Sources */,
 				6E0E70A21EB6758A00BC8FC4 /* ComplexNumber.swift in Sources */,
+				6E207AC81EB859530031CDE3 /* Linker.swift in Sources */,
 				6E0E70A41EB677D100BC8FC4 /* Vector.swift in Sources */,
 				6E3AA15D1E88B67B0059E628 /* ViewController.swift in Sources */,
 				6E0E70A61EB6790600BC8FC4 /* Matrix.swift in Sources */,
