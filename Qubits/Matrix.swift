@@ -12,6 +12,9 @@ struct Matrix {
     init(_ numbers: [[ComplexNumber]]) {
         contents = numbers
     }
+    init(_ numbers: [[Double]]) {
+        contents = numbers.map({$0.map({ComplexNumber(real: $0, imaginary: 0)})})
+    }
     
     subscript(row: Int, column: Int) -> ComplexNumber {
         get {

@@ -6,31 +6,41 @@
 		<key>type</key>
 		<string>input</string>
 		<key>name</key>
-		<string>Qubit</string>
+		<string>One</string>
 		<key>label</key>
-		<string>Q</string>
+		<string>|1&gt;</string>
 		<key>qubits</key>
 		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>type</key>
-		<string>gate</string>
+		<string>input</string>
 		<key>name</key>
-		<string>Hadamard</string>
+		<string>Zero</string>
 		<key>label</key>
-		<string>H</string>
+		<string>|0&gt;</string>
 		<key>qubits</key>
 		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>type</key>
-		<string>gate</string>
+		<string>input</string>
 		<key>name</key>
-		<string>Controlled Not</string>
+		<string>Plus</string>
 		<key>label</key>
-		<string>CNOT</string>
+		<string>|+&gt;</string>
 		<key>qubits</key>
-		<integer>2</integer>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>input</string>
+		<key>name</key>
+		<string>Minus</string>
+		<key>label</key>
+		<string>|-&gt;</string>
+		<key>qubits</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>type</key>
@@ -66,6 +76,46 @@
 		<key>type</key>
 		<string>gate</string>
 		<key>name</key>
+		<string>Hadamard</string>
+		<key>label</key>
+		<string>H</string>
+		<key>qubits</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>gate</string>
+		<key>name</key>
+		<string>Controlled Not</string>
+		<key>label</key>
+		<string>CNOT</string>
+		<key>qubits</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>gate</string>
+		<key>name</key>
+		<string>Controlled Y</string>
+		<key>label</key>
+		<string>CY</string>
+		<key>qubits</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>gate</string>
+		<key>name</key>
+		<string>Controlled Z</string>
+		<key>label</key>
+		<string>CZ</string>
+		<key>qubits</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>gate</string>
+		<key>name</key>
 		<string>Controlled Swap</string>
 		<key>label</key>
 		<string>CSWAP</string>
@@ -74,11 +124,21 @@
 	</dict>
 	<dict>
 		<key>type</key>
-		<string>output</string>
+		<string>gate</string>
 		<key>name</key>
-		<string>Measurement</string>
+		<string>Standard Measurement</string>
 		<key>label</key>
 		<string>1/0</string>
+		<key>qubits</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>gate</string>
+		<key>name</key>
+		<string>Hadamard Measurement</string>
+		<key>label</key>
+		<string>+/-</string>
 		<key>qubits</key>
 		<integer>1</integer>
 	</dict>

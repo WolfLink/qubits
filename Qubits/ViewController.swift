@@ -82,8 +82,33 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
                 if let index = blocks.index(of: component) {
                     blocks.remove(at: index)
                 }
+                for input in component.inputs {
+                    if let p = input.partner {
+                        p.partner = nil
+                        input.partner = nil
+                        if let index = linker?.links.index(of: p) {
+                            linker!.links.remove(at: index)
+                        }
+                    }
+                    if let index = linker?.links.index(of: input) {
+                        linker!.links.remove(at: index)
+                    }
+                }
+                for output in component.outputs {
+                    if let p = output.partner {
+                        p.partner = nil
+                        output.partner = nil
+                        if let index = linker?.links.index(of: p) {
+                            linker!.links.remove(at: index)
+                        }
+                    }
+                    if let index = linker?.links.index(of: output) {
+                        linker!.links.remove(at: index)
+                    }
+                }
             }
         }
+        linker?.setNeedsDisplay()
         toolbar?.scrollView.isScrollEnabled = true
     }
     func cancelPlacement(component: CircuitComponent) {

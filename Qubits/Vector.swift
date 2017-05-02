@@ -13,6 +13,13 @@ struct Vector {
         contents = numbers
     }
     
+    static func /(left: Vector, right: Double) -> Vector {
+        return Vector(left.contents.map({$0 / right}))
+    }
+    static func * (left: Vector, right: ComplexNumber) -> Vector {
+        return Vector(left.contents.map({$0 * right}))
+    }
+    
     func dot(_ other: Vector) -> ComplexNumber {
         //implement the dot product between two vectors
         var pdct = ComplexNumber(real: 0, imaginary: 0)
@@ -31,13 +38,7 @@ struct Vector {
         return total.squareRoot()
     }
     func normalize() -> Vector {
-        var vec = self.contents
-        
-        let norm = self.magnitude()
-        for i in 0..<contents.count {
-            vec[i] = vec[i] / norm
-        }
-        return Vector(vec)
+        return self / magnitude()
     }
     func conjugate() -> Vector {
         // implement taking the complex conjugate of a vector

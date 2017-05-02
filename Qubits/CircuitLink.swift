@@ -54,16 +54,24 @@ class CircuitLink: UIView {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            let point = touch.location(in: self)
-            let x = point.x - frame.size.width/2
-            let y = point.y - frame.size.height/2
-            /*if sqrt(x * x + y * y) < radius + 5 {
-                selected = true
-            }*/
             selected = true
         }
     }
+    
+    
+    // pointInCircle and overriden point(inside serve two purposes:
+    // 1. make the tappable area circular
+    // 2. allow touch events to register even when they are outside the bounds of the superview
+    func pointInCircle(_ point: CGPoint) -> Bool {
+        let x = point.x - frame.size.width/2
+        let y = point.y - frame.size.height/2
+        let r = radius + 5
+        return x * x + y * y < r * r
+    }
 
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        return pointInCircle(point)
+    }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first, selected {

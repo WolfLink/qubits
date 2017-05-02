@@ -18,7 +18,7 @@ protocol CircuitComponentDelegate: class {
 
 class CircuitComponent: UIView {
     
-    let linkRadius: CGFloat = 25
+    let linkRadius: CGFloat = 10
     
     enum DrawMode {
         case active, passive
@@ -42,7 +42,8 @@ class CircuitComponent: UIView {
                 }
             }
             else {
-                if inputs.count == 2 {
+                // the first implementation puts dots in the corners when there are twof of them.  Its good if the radius is too big to be displayed properly with the second implementation
+                /*if inputs.count == 2 {
                     inputs[0].center = CGPoint(x: 0, y: frame.height)
                     inputs[1].center = CGPoint(x: 0, y: 0)
                 }
@@ -62,9 +63,9 @@ class CircuitComponent: UIView {
                 }
                 for v in outputs {
                     addSubview(v)
-                }
+                }*/
                 
-                /*
+                // the second implemnentation kinda spaces the dots evenly and is the preferred implementation
                 let inputOffset = self.frame.height / CGFloat(inputs.count + 1)
                 for i in 0..<inputs.count {
                     let offset = inputOffset * CGFloat(i + 1)
@@ -77,7 +78,7 @@ class CircuitComponent: UIView {
                     outputs[i].center = CGPoint(x: frame.size.width, y: offset)
                     addSubview(outputs[i])
                 }
-                */
+                
             }
         }
     }
@@ -212,5 +213,20 @@ class CircuitComponent: UIView {
         child = nil
         moving = false
         startPoint = CGPoint.zero
+    }
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        for i in inputs {
+            if i.pointInCircle(convert(point, to: i)) {
+                return true
+            }
+        }
+        for o in outputs {
+            if o.pointInCircle(convert(point, to: o)) {
+                return true
+            }
+        }
+        
+        return super.point(inside: point, with: event)
     }
 }
