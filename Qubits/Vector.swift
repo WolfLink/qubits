@@ -49,4 +49,12 @@ struct Vector {
         }
         return Vector(vec)
     }
+    
+    func debugString() -> String {
+        var str = ""
+        for n in contents {
+            str += String(n.real) + ", "
+        }
+        return str
+    }
 }

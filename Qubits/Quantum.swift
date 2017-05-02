@@ -45,7 +45,11 @@ class Quantum: NSObject {
             notDoneYet = false
             // traverse the graph and assemble matrices
             var step = Matrix([[ComplexNumber]]())
+            var pass = [Int]()
             for i in 0 ..< nodes.count {
+                if pass.contains(i) {
+                    continue
+                }
                 let n = nodes[i]
                 if let p = n.partner {
                     notDoneYet = true
@@ -57,7 +61,7 @@ class Quantum: NSObject {
                         step = step.tensor(matrixForID("Identity"))
                         nodes[i] = gate.outputs[0]
                     }
-                    if gate.inputs.count == 1 {
+                    else if gate.inputs.count == 1 {
                         let newMat = matrixForID(gate.ID)
                         step = step.tensor(newMat)
                         nodes[i] = gate.outputs[0] // move on to the next node
@@ -70,21 +74,26 @@ class Quantum: NSObject {
                             if index == 0 {
                                 // if the index of this qubit is 1, let the other responsible qubit be in charge
                                 // but if the index is 0, this qubit is in charge
-                                let j = nodes.index(of: friend.partner!)
+                                let j: Int! = nodes.index(of: friend.partner!)
                                 if j == i + 1 {
                                     // the nodes are in position so we don't have to worry about any swapping
                                     step = step.tensor(matrixForID(gate.ID))
+                                    nodes[i] = gate.outputs[0]
+                                    nodes[j] = gate.outputs[1]
+                                    pass.append(j)
                                 }
                                 else if j == i - 1 {
                                     // the nodes are switched so we have to swap our gate
                                     let mat = matrixForID("Swap") * matrixForID(gate.ID) * matrixForID("Swap")
                                     step = step.tensor(mat)
+                                    nodes[i] = gate.outputs[1]
+                                    nodes[j] = gate.outputs[0]
+                                    pass.append(j)
                                 }
                                 else {
                                     NSLog("Implied swaps have not yet been implemented!")
                                 }
                             }
-                            nodes[i] = gate.outputs[index]
                         }
                         else {
                             // the other input node isn't ready yet, so insert an identity
@@ -99,6 +108,7 @@ class Quantum: NSObject {
             }
             process.append(Gates(matrix: step))
         }
+        cache = process
         
     }
     
@@ -127,6 +137,8 @@ class Quantum: NSObject {
             return Matrix([[1,0,0,0],[0,0,0,1],[0,1,0,0],[0,0,0,1]])
         case "Hadamard":
             return Matrix([[vrt2,vrt2],[vrt2,-vrt2]])
+        case "Controlled Not":
+            return Matrix([[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]])
         default:
             NSLog("Unrecognized gate type \(ID)")
             return Matrix([[ComplexNumber]]())
@@ -135,7 +147,7 @@ class Quantum: NSObject {
     
     func permuteQubits(qubits: [CircuitComponent]) -> [ComplexNumber] {
         var current = [ComplexNumber]()
-        for q in qubits {
+        for q in qubits.reversed() {
             let (a,b) = valueForQubitType(q.ID)
             if current.count == 0 {
                 current = [a,b]

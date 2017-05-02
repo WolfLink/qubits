@@ -39,8 +39,16 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Qubits!" id="1Id-Ot-hcE">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="Deh-sZ-yjW"/>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="9Vg-ac-yCj"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="Deh-sZ-yjW">
+                                            <connections>
+                                                <action selector="trash" destination="BYZ-38-t0r" id="4wr-Di-4NQ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="9Vg-ac-yCj">
+                                            <connections>
+                                                <action selector="run" destination="BYZ-38-t0r" id="5Vj-mF-73f"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>

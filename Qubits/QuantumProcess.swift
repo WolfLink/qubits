@@ -22,6 +22,8 @@ class Gates: NSObject, QuantumProcess {
     }
     
     func processVector(_ vector: Vector) -> Vector {
+        //let newVector = matrix.vectorMultiply(vector)
+        //NSLog("before: \(vector.debugString()) after: \(newVector.debugString())")
         return matrix.vectorMultiply(vector)
     }
 }
@@ -38,6 +40,7 @@ class Measurement: NSObject, QuantumProcess {
     
     func processVector(_ vector: Vector) -> Vector {
         let picked = pickIndex(vector: vector)
+        //NSLog("picked: \(picked) for index \(index)")
         let length = vector.contents.count
         if index < 0 {
             NSLog("measurement failed")
@@ -45,7 +48,9 @@ class Measurement: NSObject, QuantumProcess {
         }
         
         let result = posForIndex(i: picked, j: index, length: length)
+        NSLog("result \(result) for index \(index) and picked \(picked)")
         output.label.text = result ? "1" : "0"
+        RunLoop.main.run(until: Date(timeIntervalSinceNow: 0.1))
         
         let newVector = Vector(vector.contents.enumerated().map({posForIndex(i: $0.0, j: index, length: length) == result ? $0.1 : ComplexNumber(real: 0, imaginary: 0)})).normalize()
         
@@ -53,11 +58,15 @@ class Measurement: NSObject, QuantumProcess {
     }
     
     func posForIndex(i: Int, j: Int, length: Int) -> Bool {
-        return Int(floor(Double(i) / (Double(length) / pow(2, Double(j + 1))))) % i == 0
+        if i == 0 {
+            return false
+        }
+        return Int(floor(Double(i) / (Double(length) / pow(2, Double(j + 1))))) % 2 != 0
     }
     
     func pickIndex(vector: Vector) -> Int {
         let value = Int(arc4random_uniform(1000000000))
+        //NSLog("today's random \(value)")
         var current = 0
         for (i, v) in vector.contents.enumerated() {
             let ms = v.magSquared()
