@@ -20,6 +20,7 @@
 		6E704BE21E8DA4E800A1953C /* CircuitToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E704BE11E8DA4E800A1953C /* CircuitToolbar.swift */; };
 		6E704BE41E8DA62A00A1953C /* ComponentList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E704BE31E8DA62A00A1953C /* ComponentList.plist */; };
 		6ED7BC4F1EB7CE08009CA442 /* CircuitLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7BC4E1EB7CE08009CA442 /* CircuitLink.swift */; };
+		6EEADFD21EB805090074023B /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEADFD11EB805090074023B /* Convenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		6E704BE11E8DA4E800A1953C /* CircuitToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitToolbar.swift; sourceTree = "<group>"; };
 		6E704BE31E8DA62A00A1953C /* ComponentList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ComponentList.plist; sourceTree = "<group>"; };
 		6ED7BC4E1EB7CE08009CA442 /* CircuitLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitLink.swift; sourceTree = "<group>"; };
+		6EEADFD11EB805090074023B /* Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Convenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		6E3AA16E1E88B6A70059E628 /* Circuit GUI */ = {
 			isa = PBXGroup;
 			children = (
+				6EEADFD11EB805090074023B /* Convenience.swift */,
 				6ED7BC4E1EB7CE08009CA442 /* CircuitLink.swift */,
 				6E3AA16C1E88B69D0059E628 /* CircuitComponent.swift */,
 				6E704BE11E8DA4E800A1953C /* CircuitToolbar.swift */,
@@ -179,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E18D89B1EB0557000181073 /* CircuitComponentCollectionViewCell.swift in Sources */,
+				6EEADFD21EB805090074023B /* Convenience.swift in Sources */,
 				6E0E70A21EB6758A00BC8FC4 /* ComplexNumber.swift in Sources */,
 				6E0E70A41EB677D100BC8FC4 /* Vector.swift in Sources */,
 				6E3AA15D1E88B67B0059E628 /* ViewController.swift in Sources */,

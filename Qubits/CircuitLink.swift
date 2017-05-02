@@ -22,10 +22,8 @@ class CircuitLink: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        // this initializer should never be used since this view will only be created manually but its required by swift for semantic reasons
-        self.radius = 0
-        self.owner = CircuitComponent(title: "Hello World")
-        super.init(coder: aDecoder)
+        NSLog("Do not use this initializer!  It is only included as a formality for Cocoa reasons.")
+        return nil
     }
     
 

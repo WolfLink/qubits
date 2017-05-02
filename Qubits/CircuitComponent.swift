@@ -20,39 +20,93 @@ class CircuitComponent: UIView {
         case active, passive
     }
     let label: UILabel = UILabel(frame: CGRect.zero)
-    var drawMode: DrawMode = .passive
+    let ID: String
     var moving: Bool = false
     static weak var delegate: CircuitComponentDelegate?
     weak var child: CircuitComponent?
-    var links = [CircuitLink]()
+    var inputs = [CircuitLink]()
+    var outputs = [CircuitLink]()
     
-    convenience init(dictionary dict: NSDictionary) {
-        self.init(title: dict.value(forKey: "label") as! String)
+    var drawMode: DrawMode = .passive {
+        didSet {
+            if drawMode == .passive {
+                for view in inputs {
+                    view.removeFromSuperview()
+                }
+                for view in outputs {
+                    view.removeFromSuperview()
+                }
+            }
+            else {
+                let inputOffset = self.frame.height / CGFloat(inputs.count + 1)
+                for i in 0..<inputs.count {
+                    let offset = inputOffset * CGFloat(i + 1)
+                    inputs[i].center = CGPoint(x: 0, y: offset)
+                    addSubview(inputs[i])
+                }
+                let outputOffset = self.frame.height / CGFloat(outputs.count + 1)
+                for i in 0..<outputs.count {
+                    let offset = outputOffset * CGFloat(i + 1)
+                    outputs[i].center = CGPoint(x: frame.size.width, y: offset)
+                    addSubview(outputs[i])
+                }
+            }
+        }
     }
     
-    convenience init(copy original: CircuitComponent) {
-        let title: String
-        if let text = original.label.text {
-            title = text
+    
+    
+    // initializers
+    init(dictionary dict: NSDictionary) {
+        //self.init(title: dict.value(forKey: "label") as! String)
+        ID = dict.value(forKey: "name") as! String
+        super.init(frame: CGRect.zero)
+        label.text = dict.value(forKey: "label") as? String
+        addSubview(label)
+        if let type = dict.value(forKey: "type") as? String {
+            let qubits = dict.value(forKey: "qubits") as! Int
+            inputs = []
+            outputs = []
+            if type == "input" || type == "gate" {
+                for _ in 0..<qubits {
+                    outputs.append(CircuitLink(radius: 5, owner: self))
+                }
+            }
+            if type == "output" || type == "gate" {
+                for _ in 0..<qubits {
+                    inputs.append(CircuitLink(radius: 5, owner: self))
+                }
+            }
         }
-        else {
-            title = ""
-        }
-        self.init(title: title, frame: original.frame)
     }
     
-    init(title text:String, frame rect:CGRect = CGRect.zero) {
+    init(copy original: CircuitComponent) {
+        ID = original.ID
+        super.init(frame: original.frame)
+        label.text = original.label.text
+        addSubview(label)
+        inputs = []
+        outputs = []
+        for _ in original.inputs {
+            inputs.append(CircuitLink(radius: 5, owner: self))
+        }
+        for _ in original.outputs {
+            outputs.append(CircuitLink(radius: 5, owner: self))
+        }
+    }
+    
+    /*init(title text:String, frame rect:CGRect = CGRect.zero) {
         super.init(frame: rect)
         label.text = text
         addSubview(label)
-    }
+    }*/
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        label.text = ""
-        addSubview(label)
+        NSLog("You should not be using this initializer!  It is just a formality to comply with Cocoa")
+        return nil
     }
     
+    // custom drawing
     override func draw(_ rect: CGRect) {
         label.frame = rect
         label.textAlignment = NSTextAlignment.center
@@ -64,6 +118,7 @@ class CircuitComponent: UIView {
         rectPath.stroke()
     }
     
+    // handling touches and duplication
     var startPoint = CGPoint.zero
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.count == 1 {
@@ -83,7 +138,7 @@ class CircuitComponent: UIView {
                 else if let component = child {
                     CircuitComponent.delegate?.moveComponent(component, to: touch!, offset: startPoint)
                 }
-                else if distanceFrom(startPoint, to: point) > 10 {
+                else if startPoint.distanceTo(point) > 10 {
                     if drawMode == DrawMode.passive {
                         let newComponent = CircuitComponent(copy: self)
                         newComponent.drawMode = DrawMode.active
@@ -124,11 +179,5 @@ class CircuitComponent: UIView {
         child = nil
         moving = false
         startPoint = CGPoint.zero
-    }
-    
-    func distanceFrom(_ a: CGPoint, to b: CGPoint) -> Double {
-        let dx = a.x - b.x
-        let dy = a.y - b.y
-        return sqrt(Double(dx * dx + dy * dy))
     }
 }
