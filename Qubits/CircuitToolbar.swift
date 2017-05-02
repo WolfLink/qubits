@@ -66,7 +66,6 @@ class CircuitToolbar: UIView {
                 currentX += length + 5
                 totalLength += length + 5
                 scrollView.addSubview(component)
-                component.drawMode = .unselected
             }
         }
         contentSize = CGSize(width: totalLength, height: self.frame.size.height)

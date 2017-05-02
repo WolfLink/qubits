@@ -15,7 +15,6 @@ struct Vector {
     
     func dot(_ other: Vector) -> ComplexNumber {
         //implement the dot product between two vectors
-        var i = 0
         var pdct = ComplexNumber(real: 0, imaginary: 0)
         for i in 0...contents.count {
             pdct = pdct + self.contents[i].conjugate()*other.contents[i]

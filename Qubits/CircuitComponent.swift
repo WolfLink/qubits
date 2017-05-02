@@ -20,7 +20,7 @@ class CircuitComponent: UIView {
         case active, passive
     }
     let label: UILabel = UILabel(frame: CGRect.zero)
-    var drawMode: DrawMode = .unselected
+    var drawMode: DrawMode = .passive
     var moving: Bool = false
     static weak var delegate: CircuitComponentDelegate?
     weak var child: CircuitComponent?
@@ -28,7 +28,6 @@ class CircuitComponent: UIView {
     
     convenience init(dictionary dict: NSDictionary) {
         self.init(title: dict.value(forKey: "label") as! String)
-        self.drawMode = .unselected
     }
     
     convenience init(copy original: CircuitComponent) {
@@ -40,7 +39,6 @@ class CircuitComponent: UIView {
             title = ""
         }
         self.init(title: title, frame: original.frame)
-        self.drawMode = .
     }
     
     init(title text:String, frame rect:CGRect = CGRect.zero) {
@@ -86,7 +84,7 @@ class CircuitComponent: UIView {
                     CircuitComponent.delegate?.moveComponent(component, to: touch!, offset: startPoint)
                 }
                 else if distanceFrom(startPoint, to: point) > 10 {
-                    if drawMode == DrawMode.unselected {
+                    if drawMode == DrawMode.passive {
                         let newComponent = CircuitComponent(copy: self)
                         newComponent.drawMode = DrawMode.active
                         newComponent.moving = true
