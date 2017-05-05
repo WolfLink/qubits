@@ -26,6 +26,7 @@ class CircuitComponent: UIView {
     let label: UILabel = UILabel(frame: CGRect.zero)
     let ID: String
     let type: String
+    let originalLabel: String
     var moving: Bool = false
     static weak var delegate: CircuitComponentDelegate?
     weak var child: CircuitComponent?
@@ -91,8 +92,15 @@ class CircuitComponent: UIView {
         //self.init(title: dict.value(forKey: "label") as! String)
         ID = dict.value(forKey: "name") as! String
         type = dict.value(forKey: "type") as! String
-        super.init(frame: CGRect.zero)
-        label.text = dict.value(forKey: "label") as? String
+        originalLabel = dict.value(forKey: "label") as! String
+        if let v = dict.value(forKey: "rect") {
+            let rectDict = v as! CFDictionary
+            super.init(frame: CGRect(dictionaryRepresentation: rectDict)!)
+        }
+        else {
+           super.init(frame: CGRect.zero)
+        }
+        label.text = originalLabel
         addSubview(label)
         if let type = dict.value(forKey: "type") as? String {
             let qubits = dict.value(forKey: "qubits") as! Int
@@ -108,13 +116,32 @@ class CircuitComponent: UIView {
                 }
             }
         }
+        
+        if let m = dict.value(forKey: "mode") as? Bool {
+            self.setDrawMode(mode: m)
+        }
+    }
+    func setDrawMode(mode: Bool) {
+        self.drawMode = mode ? .active : .passive
+    }
+    
+    func dictionaryValue() -> NSDictionary {
+        let dict = NSMutableDictionary()
+        dict.setValue(ID, forKey: "name")
+        dict.setValue(type, forKey: "type")
+        dict.setValue(originalLabel, forKey: "label")
+        dict.setValue(outputs.count, forKey: "qubits") // all blocks have outputs but some blocks don't have inputs
+        dict.setValue(frame.dictionaryRepresentation, forKey: "rect")
+        dict.setValue(drawMode == .active, forKey: "mode")
+        return dict
     }
     
     init(copy original: CircuitComponent) {
         ID = original.ID
         type = original.type
+        originalLabel = original.originalLabel
         super.init(frame: original.frame)
-        label.text = original.label.text
+        label.text = originalLabel
         addSubview(label)
         inputs = []
         outputs = []

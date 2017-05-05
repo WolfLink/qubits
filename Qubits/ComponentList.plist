@@ -116,6 +116,16 @@
 		<key>type</key>
 		<string>gate</string>
 		<key>name</key>
+		<string>Identity</string>
+		<key>label</key>
+		<string>I</string>
+		<key>qubits</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>gate</string>
+		<key>name</key>
 		<string>Swap</string>
 		<key>label</key>
 		<string>SWAP</string>

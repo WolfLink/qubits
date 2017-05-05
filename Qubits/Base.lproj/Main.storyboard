@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zpE-tB-ALh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,6 +9,62 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--File Manager View Controller-->
+        <scene sceneID="bgO-O8-nZb">
+            <objects>
+                <viewController id="zpE-tB-ALh" customClass="FileManagerViewController" customModule="Qubits" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jew-xr-c8k"/>
+                        <viewControllerLayoutGuide type="bottom" id="CTx-Cb-zQb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eoI-IE-52Y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DCa-be-b7T">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="V0v-CD-5hn"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Saved Circuits" id="7Ok-Oj-pOp">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="3rE-a5-Z3m">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="presentation" identifier="new" modalTransitionStyle="coverVertical" id="iz1-n7-Nrx"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d5b-jx-XTc">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="zpE-tB-ALh" id="atJ-rc-viq"/>
+                                    <outlet property="delegate" destination="zpE-tB-ALh" id="Ny8-Qt-rhC"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="d5b-jx-XTc" firstAttribute="leading" secondItem="eoI-IE-52Y" secondAttribute="leading" id="18G-J9-Gl8"/>
+                            <constraint firstItem="DCa-be-b7T" firstAttribute="top" secondItem="eoI-IE-52Y" secondAttribute="top" id="BCa-1r-BbS"/>
+                            <constraint firstItem="d5b-jx-XTc" firstAttribute="top" secondItem="DCa-be-b7T" secondAttribute="bottom" id="I06-W4-KLw"/>
+                            <constraint firstAttribute="trailing" secondItem="d5b-jx-XTc" secondAttribute="trailing" id="sYm-Wi-Z4y"/>
+                            <constraint firstItem="CTx-Cb-zQb" firstAttribute="top" secondItem="d5b-jx-XTc" secondAttribute="bottom" id="tix-HJ-wjL"/>
+                            <constraint firstAttribute="trailing" secondItem="DCa-be-b7T" secondAttribute="trailing" id="xYd-iy-19J"/>
+                            <constraint firstItem="DCa-be-b7T" firstAttribute="leading" secondItem="eoI-IE-52Y" secondAttribute="leading" id="y0C-yu-f2h"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="d5b-jx-XTc" id="eEi-VL-GVb"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="load" modalTransitionStyle="coverVertical" id="Qok-UF-PUw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h3F-s2-gXs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-846" y="46"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -33,15 +89,15 @@
                                 </constraints>
                             </view>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jnm-Jp-10S">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="FRj-ib-vPz"/>
+                                    <constraint firstAttribute="height" constant="64" id="J3a-NL-zl6"/>
                                 </constraints>
                                 <items>
                                     <navigationItem title="Needs Compiling" id="1Id-Ot-hcE">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="Deh-sZ-yjW">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="Deh-sZ-yjW">
                                             <connections>
-                                                <action selector="trash" destination="BYZ-38-t0r" id="4wr-Di-4NQ"/>
+                                                <action selector="back" destination="BYZ-38-t0r" id="axQ-nQ-2XL"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="play" id="9Vg-ac-yCj">
@@ -55,16 +111,16 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Jnm-Jp-10S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="N1k-XH-peL"/>
+                            <constraint firstItem="Jnm-Jp-10S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="IIi-oB-5ev"/>
                             <constraint firstAttribute="trailing" secondItem="arS-m6-X1e" secondAttribute="trailing" id="Slf-88-psJ"/>
                             <constraint firstItem="arS-m6-X1e" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="aF8-GO-adF"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="CAc-FU-ifp" secondAttribute="bottom" id="cWg-Vl-FDD"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="arS-m6-X1e" secondAttribute="bottom" id="gVj-4D-QQJ"/>
                             <constraint firstItem="CAc-FU-ifp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="j0a-bi-sYn"/>
                             <constraint firstItem="arS-m6-X1e" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="oy4-8E-ftv"/>
-                            <constraint firstItem="Jnm-Jp-10S" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pMo-lu-jr4"/>
-                            <constraint firstAttribute="trailing" secondItem="Jnm-Jp-10S" secondAttribute="trailing" id="pab-R6-yVM"/>
                             <constraint firstAttribute="trailing" secondItem="CAc-FU-ifp" secondAttribute="trailing" id="uri-wN-xR0"/>
+                            <constraint firstItem="Jnm-Jp-10S" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="wBY-jY-f5X"/>
+                            <constraint firstAttribute="trailing" secondItem="Jnm-Jp-10S" secondAttribute="trailing" id="zVJ-t2-nyt"/>
                         </constraints>
                     </view>
                     <connections>
@@ -75,7 +131,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
+            <point key="canvasLocation" x="97" y="47"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="iz1-n7-Nrx"/>
+    </inferredMetricsTieBreakers>
 </document>

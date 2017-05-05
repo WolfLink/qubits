@@ -22,6 +22,7 @@
 		6E581A8A1EB916BC00525382 /* QuantumProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E581A891EB916BC00525382 /* QuantumProcess.swift */; };
 		6E704BE21E8DA4E800A1953C /* CircuitToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E704BE11E8DA4E800A1953C /* CircuitToolbar.swift */; };
 		6E704BE41E8DA62A00A1953C /* ComponentList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E704BE31E8DA62A00A1953C /* ComponentList.plist */; };
+		6E8374721EBCA396002B6A7A /* FileManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8374711EBCA396002B6A7A /* FileManagerViewController.swift */; };
 		6ED7BC4F1EB7CE08009CA442 /* CircuitLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7BC4E1EB7CE08009CA442 /* CircuitLink.swift */; };
 		6EEADFD21EB805090074023B /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEADFD11EB805090074023B /* Convenience.swift */; };
 /* End PBXBuildFile section */
@@ -44,6 +45,7 @@
 		6E581A891EB916BC00525382 /* QuantumProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuantumProcess.swift; sourceTree = "<group>"; };
 		6E704BE11E8DA4E800A1953C /* CircuitToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitToolbar.swift; sourceTree = "<group>"; };
 		6E704BE31E8DA62A00A1953C /* ComponentList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ComponentList.plist; sourceTree = "<group>"; };
+		6E8374711EBCA396002B6A7A /* FileManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerViewController.swift; sourceTree = "<group>"; };
 		6ED7BC4E1EB7CE08009CA442 /* CircuitLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitLink.swift; sourceTree = "<group>"; };
 		6EEADFD11EB805090074023B /* Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Convenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +94,7 @@
 				6E3AA16E1E88B6A70059E628 /* Circuit GUI */,
 				6E3AA15A1E88B67B0059E628 /* AppDelegate.swift */,
 				6E3AA15C1E88B67B0059E628 /* ViewController.swift */,
+				6E8374711EBCA396002B6A7A /* FileManagerViewController.swift */,
 				6E3AA15E1E88B67B0059E628 /* Main.storyboard */,
 				6E3AA1611E88B67B0059E628 /* Assets.xcassets */,
 				6E3AA1631E88B67B0059E628 /* LaunchScreen.storyboard */,
@@ -190,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E8374721EBCA396002B6A7A /* FileManagerViewController.swift in Sources */,
 				6EEADFD21EB805090074023B /* Convenience.swift in Sources */,
 				6E0E70A21EB6758A00BC8FC4 /* ComplexNumber.swift in Sources */,
 				6E207AC81EB859530031CDE3 /* Linker.swift in Sources */,
