@@ -1,3 +1,4 @@
+
 //
 //  Matrix.swift
 //  Qubits
@@ -5,10 +6,9 @@
 //  Created by Marc Davis on 4/30/17.
 //  Copyright © 2017 Marc Davis. All rights reserved.
 //
-
 struct Matrix: CustomStringConvertible {
     let contents: [[ComplexNumber]]
-
+    
     init(_ numbers: [[ComplexNumber]]) {
         contents = numbers
     }
@@ -38,18 +38,21 @@ struct Matrix: CustomStringConvertible {
             return contents[row][column]
         }
     }
-
+    
     static func * (left: Matrix, right: Matrix) -> Matrix {
         //implement matrix-matrix multiplication
+        
         var Mat = left.contents
         for i in 0..<left.contents.count {
             for j in 0..<right.contents.count {
+                
                 Mat[i][j] = left.getRow(index: i).dot(right.getCol(index: j))
+                
             }
         }
         return Matrix(Mat)
     }
-
+    
     func vectorMultiply(_ vec: Vector) -> Vector {
         //implement matrix-vector multiplication
         var sol = [ComplexNumber]()
@@ -59,12 +62,12 @@ struct Matrix: CustomStringConvertible {
         return Vector(sol)
         
     }
-    func getCol(index: Int) -> Vector {
+    func getRow(index: Int) -> Vector {
         // get a column of the matrix
         return Vector(self.contents[index])
     }
     
-    func getRow(index: Int) -> Vector {
+    func getCol(index: Int) -> Vector {
         // get a row of the matrix
         var vec = [ComplexNumber]()
         for i in 0..<self.contents.count {
@@ -72,17 +75,17 @@ struct Matrix: CustomStringConvertible {
         }
         return Vector(vec)
     }
-
+    
     func conjugate() -> Matrix {
         //implement the conjugate transpose
         if contents.isEmpty {
-          return Matrix(contents)
+            return Matrix(contents)
         }
         var conj = [[ComplexNumber]](repeating: [ComplexNumber](), count: contents[0].count)
         for row in contents {
-          for (i, num) in row.enumerated() {
-            conj[i].append(num.conjugate())
-          }
+            for (i, num) in row.enumerated() {
+                conj[i].append(num.conjugate())
+            }
         }
         return Matrix(conj)
     }
@@ -99,16 +102,16 @@ struct Matrix: CustomStringConvertible {
         }
         return Matrix(conj)
     }
-
+    
     //scales all components by factor k
     func scale(k: ComplexNumber) -> Matrix {
-      /*var scaled = [[ComplexNumber]]()
-      for i in 0..<contents.count {
-        scaled.append([ComplexNumber]())
-        for j in 0..<contents[i].count {
-          scaled[i][j] = k*contents[i][j]
-        }
-      }*/
+        /*var scaled = [[ComplexNumber]]()
+         for i in 0..<contents.count {
+         scaled.append([ComplexNumber]())
+         for j in 0..<contents[i].count {
+         scaled[i][j] = k*contents[i][j]
+         }
+         }*/
         return Matrix(contents.map({$0.map({$0 * k})}))
     }
     
@@ -121,8 +124,8 @@ struct Matrix: CustomStringConvertible {
         }
         return Matrix(contents.enumerated().map({$0.1 + right.contents[$0.0]}))
     }
-
-
+    
+    
     func tensor(_ right: Matrix) -> Matrix {
         if self.contents.isEmpty || self.contents[0].isEmpty {
             return right
