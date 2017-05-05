@@ -52,7 +52,17 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        linker?.setNeedsDisplay()
+        if let l = linker {
+            NSLog("\(l.bounds.width) to \(size.width)")
+            let bw2 = l.bounds.width/2
+            let bh2 = l.bounds.height/2
+            UIView.animate(withDuration: coordinator.transitionDuration, animations: {
+                for s in l.subviews {
+                    s.center = CGPoint(x: s.center.x + size.width/2 - bw2, y: s.center.y + size.height/2 - bh2)
+                }
+            })
+            l.setNeedsDisplay()
+        }
     }
     
     @IBAction func trash() {
