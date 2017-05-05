@@ -38,7 +38,7 @@
                                     <constraint firstAttribute="height" constant="44" id="FRj-ib-vPz"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="Qubits!" id="1Id-Ot-hcE">
+                                    <navigationItem title="Needs Compiling" id="1Id-Ot-hcE">
                                         <barButtonItem key="leftBarButtonItem" systemItem="trash" id="Deh-sZ-yjW">
                                             <connections>
                                                 <action selector="trash" destination="BYZ-38-t0r" id="4wr-Di-4NQ"/>
@@ -69,6 +69,7 @@
                     </view>
                     <connections>
                         <outlet property="linker" destination="arS-m6-X1e" id="8jh-vO-7ZF"/>
+                        <outlet property="titleBar" destination="Jnm-Jp-10S" id="uu4-9c-S8v"/>
                         <outlet property="toolbar" destination="CAc-FU-ifp" id="rgo-YH-Hve"/>
                     </connections>
                 </viewController>

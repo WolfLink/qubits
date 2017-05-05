@@ -6,7 +6,7 @@
 //  Copyright © 2017 Marc Davis. All rights reserved.
 //
 
-struct Matrix {
+struct Matrix: CustomStringConvertible {
     let contents: [[ComplexNumber]]
 
     init(_ numbers: [[ComplexNumber]]) {
@@ -14,6 +14,23 @@ struct Matrix {
     }
     init(_ numbers: [[Double]]) {
         contents = numbers.map({$0.map({ComplexNumber(real: $0, imaginary: 0)})})
+    }
+    
+    var description: String {
+        var str = ""
+        for row in contents {
+            var rowstr = "|"
+            for (i,c) in row.enumerated() {
+                if i == row.count - 1 {
+                    rowstr += "\(c)|\n"
+                }
+                else {
+                    rowstr += "\(c),"
+                }
+            }
+            str += rowstr
+        }
+        return str
     }
     
     subscript(row: Int, column: Int) -> ComplexNumber {

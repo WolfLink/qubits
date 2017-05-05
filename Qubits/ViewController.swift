@@ -11,21 +11,52 @@ import UIKit
 class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDelegate {
     @IBOutlet weak var toolbar: CircuitToolbar?
     @IBOutlet weak var linker: Linker?
+    @IBOutlet weak var titleBar: UINavigationBar?
     var blocks = [CircuitComponent]()
     let simulator: Quantum = Quantum()
     
     @IBAction func run() {
-        if !simulator.runSimulation() {
-            simulator.process(components: blocks)
+        // do the simulation on the background thread
+        if self.simulator.cache == nil || self.simulator.inputCache == nil {
+            self.titleBar?.topItem?.title = "Compiling..."
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.simulator.process(components: self.blocks)
+                DispatchQueue.main.async {
+                    self.titleBar?.topItem?.title = "Running..."
+                }
+                self.simulator.runSimulation()
+                DispatchQueue.main.async {
+                    self.titleBar?.topItem?.title = "Ready."
+                }
+            }
+        }
+        else {
+            self.titleBar?.topItem?.title = "Running..."
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.simulator.runSimulation()
+                DispatchQueue.main.async {
+                    self.titleBar?.topItem?.title = "Ready."
+                }
+            }
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        linker?.setNeedsDisplay()
+    }
+    
     @IBAction func trash() {
+        for block in blocks {
+            block.removeFromSuperview()
+        }
+        
         blocks = [CircuitComponent]()
         linker?.links = [CircuitLink]()
         linker?.selectedLink = nil
         linker?.selectedPoint = CGPoint.zero
         simulator.invalidateCache()
+        titleBar?.topItem?.title = "Needs Compiling"
     }
     
     override func viewDidLayoutSubviews() {
@@ -122,6 +153,7 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
                     }
                 }
                 simulator.invalidateCache()
+                titleBar?.topItem?.title = "Needs Compiling"
             }
         }
         linker?.setNeedsDisplay()
@@ -133,6 +165,7 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
             blocks.remove(at: index)
         }
         simulator.invalidateCache()
+        titleBar?.topItem?.title = "Needs Compiling"
         toolbar?.scrollView.isScrollEnabled = true
     }
     
@@ -153,6 +186,7 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
                     linker?.links.append(link)
                 }
                 simulator.invalidateCache()
+                titleBar?.topItem?.title = "Needs Compiling"
             }
         }
         linker?.setNeedsDisplay()
@@ -174,6 +208,7 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
                 p.partner = nil
             }
             simulator.invalidateCache()
+            titleBar?.topItem?.title = "Needs Compiling"
         }
         linker?.setNeedsDisplay()
     }

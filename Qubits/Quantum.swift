@@ -18,16 +18,12 @@ class Quantum: NSObject {
         inputCache = nil
     }
     
-    func runSimulation() -> Bool {
+    func runSimulation() {
         if let c = cache, let i = inputCache {
             var v = i
             for process in c {
                 v = process.processVector(v)
             }
-            return true
-        }
-        else {
-            return false // we need a cache to run the simulation
         }
     }
     
@@ -46,6 +42,7 @@ class Quantum: NSObject {
             // traverse the graph and assemble matrices
             var step = Matrix([[ComplexNumber]]())
             var pass = [Int]()
+            var processed = [CircuitLink]()
             for i in 0 ..< nodes.count {
                 if pass.contains(i) {
                     continue
@@ -60,16 +57,18 @@ class Quantum: NSObject {
                         process.append(Measurement(component: gate, index: i))
                         step = step.tensor(matrixForID("Identity"))
                         nodes[i] = gate.outputs[0]
+                        processed.append(nodes[i])
                     }
                     else if gate.inputs.count == 1 {
                         let newMat = matrixForID(gate.ID)
                         step = step.tensor(newMat)
                         nodes[i] = gate.outputs[0] // move on to the next node
+                        processed.append(nodes[i])
                     }
                     else if gate.inputs.count == 2 {
                         let index = gate.inputs.index(of: p)!
                         let friend = gate.inputs[1 - index] // this will give 1 if index==0 and 0 if index==1
-                        if nodes.contains(friend.partner!) {
+                        if nodes.contains(friend.partner!) && !processed.contains(friend.partner!) {
                             // the other input is ready to apply the gate
                             if index == 0 {
                                 // if the index of this qubit is 1, let the other responsible qubit be in charge
@@ -81,6 +80,8 @@ class Quantum: NSObject {
                                     nodes[i] = gate.outputs[0]
                                     nodes[j] = gate.outputs[1]
                                     pass.append(j)
+                                    processed.append(nodes[i])
+                                    processed.append(nodes[j])
                                 }
                                 else if j == i - 1 {
                                     // the nodes are switched so we have to swap our gate
@@ -89,6 +90,8 @@ class Quantum: NSObject {
                                     nodes[i] = gate.outputs[1]
                                     nodes[j] = gate.outputs[0]
                                     pass.append(j)
+                                    processed.append(nodes[i])
+                                    processed.append(nodes[j])
                                 }
                                 else {
                                     NSLog("Implied swaps have not yet been implemented!")
@@ -98,6 +101,7 @@ class Quantum: NSObject {
                         else {
                             // the other input node isn't ready yet, so insert an identity
                             step = step.tensor(matrixForID("Identity"))
+                            processed.append(nodes[i])
                         }
                     }
                 }
@@ -137,6 +141,22 @@ class Quantum: NSObject {
             return Matrix([[1,0,0,0],[0,0,0,1],[0,1,0,0],[0,0,0,1]])
         case "Hadamard":
             return Matrix([[vrt2,vrt2],[vrt2,-vrt2]])
+        case "Pauli-X":
+            return Matrix([[0,1],[1,0]])
+        case "Pauli-Y":
+            return Matrix([[ComplexNumber.zero, -ComplexNumber.i],[ComplexNumber.i,ComplexNumber.zero]])
+        case "Pauli-Z":
+            return Matrix([[1,0],[0,-1]])
+        case "Controlled Not":
+            return Matrix([[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]])
+        case "Controlled Y":
+            // this is a long one so I am defining these constants for readability's sake
+            let c1 = ComplexNumber.one
+            let c0 = ComplexNumber.zero
+            let ci = ComplexNumber.i
+            return Matrix([[c1,c0,c0,c0],[c0,c1,c0,c0],[c0,c0,c0,-ci],[c0,c0,ci,c0]])
+        case "Controlled Z":
+            return Matrix([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,-1]])
         case "Controlled Not":
             return Matrix([[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]])
         default:

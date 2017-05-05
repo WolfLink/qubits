@@ -48,9 +48,9 @@ class Measurement: NSObject, QuantumProcess {
         }
         
         let result = posForIndex(i: picked, j: index, length: length)
-        NSLog("result \(result) for index \(index) and picked \(picked)")
-        output.label.text = result ? "1" : "0"
-        RunLoop.main.run(until: Date(timeIntervalSinceNow: 0.1))
+        DispatchQueue.main.async {
+            self.output.label.text = result ? "1" : "0"
+        }
         
         let newVector = Vector(vector.contents.enumerated().map({posForIndex(i: $0.0, j: index, length: length) == result ? $0.1 : ComplexNumber(real: 0, imaginary: 0)})).normalize()
         

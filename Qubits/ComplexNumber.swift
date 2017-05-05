@@ -6,13 +6,33 @@
 //  Copyright © 2017 Marc Davis. All rights reserved.
 //
 
-struct ComplexNumber {
+struct ComplexNumber: CustomStringConvertible {
     let real: Double
     let imaginary: Double
+    
+    var description: String {
+        if imaginary == 0 {
+            return real.description
+        }
+        else if real == 0{
+            return "\(imaginary)i"
+        }
+        else {
+            return "\(real) + \(imaginary)i"
+        }
+    }
     
     init(real r: Double, imaginary i: Double) {
         real = r
         imaginary = i
+    }
+    
+    static let zero = ComplexNumber(real: 0, imaginary: 0)
+    static let one = ComplexNumber(real: 1, imaginary: 0)
+    static let i = ComplexNumber(real: 0, imaginary: 1)
+    
+    static prefix func - (number: ComplexNumber) -> ComplexNumber {
+        return ComplexNumber(real: -number.real, imaginary: -number.imaginary)
     }
     
     static func * (left: ComplexNumber, right: ComplexNumber) -> ComplexNumber {

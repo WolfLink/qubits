@@ -328,7 +328,7 @@
 				DEVELOPMENT_TEAM = 228X6FPGAD;
 				INFOPLIST_FILE = Qubits/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = marc.davis.Qubits;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcdavis.qubits;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -341,7 +341,7 @@
 				DEVELOPMENT_TEAM = 228X6FPGAD;
 				INFOPLIST_FILE = Qubits/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = marc.davis.Qubits;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcdavis.qubits;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

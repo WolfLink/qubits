@@ -6,8 +6,21 @@
 //  Copyright © 2017 Marc Davis. All rights reserved.
 //
 
-struct Vector {
+struct Vector: CustomStringConvertible {
     let contents: [ComplexNumber]
+    
+    var description: String {
+        var str = "["
+        for (i,c) in contents.enumerated() {
+            if i == contents.count - 1 {
+                str += "\(c)]"
+            }
+            else {
+                str += "\(c),"
+            }
+        }
+        return str
+    }
     
     init(_ numbers: [ComplexNumber]) {
         contents = numbers
