@@ -43,9 +43,8 @@ class Quantum: NSObject {
             var step = Matrix([[ComplexNumber]]())
             var pass = [Int]()
             var processed = [CircuitLink]()
-            var skipFlag = false // a flag useful for handling implicit swaps
             for i in 0 ..< nodes.count {
-                if pass.contains(i) || skipFlag {
+                if pass.contains(i) {
                     continue
                 }
                 let n = nodes[i]
@@ -84,8 +83,7 @@ class Quantum: NSObject {
                                     }
                                 }
                                 
-                                skipFlag = true // we have filled the rest of this step with identities so skip all the rest of the qubits
-                                continue
+                                break
                             }
                             else if j - i > 2 {
                                 // implicit swaps for when we need a bunch of implicit swaps
@@ -130,8 +128,7 @@ class Quantum: NSObject {
                                 }
                                 
                                 
-                                skipFlag = true // we have filled the rest of this step with identities so skip all the rest of the qubits
-                                continue
+                                break
                             }
                             else if index == 0 {
                                 // if the index of this qubit is 1, let the other responsible qubit be in charge
