@@ -86,9 +86,10 @@ class Quantum: NSObject {
                                 else if j == i - 1 {
                                     // the nodes are switched so we have to swap our gate
                                     let mat = matrixForID("Swap") * matrixForID(gate.ID) * matrixForID("Swap")
+                                    print(mat)
                                     step = step.tensor(mat)
-                                    nodes[i] = gate.outputs[1]
-                                    nodes[j] = gate.outputs[0]
+                                    nodes[i] = gate.outputs[0]
+                                    nodes[j] = gate.outputs[1]
                                     pass.append(j)
                                     processed.append(nodes[i])
                                     processed.append(nodes[j])
@@ -138,7 +139,7 @@ class Quantum: NSObject {
         case "Identity":
             return Matrix([[1,0],[0,1]])
         case "Swap" :
-            return Matrix([[1,0,0,0],[0,0,0,1],[0,1,0,0],[0,0,0,1]])
+            return Matrix([[1,0,0,0],[0,0,1,0],[0,1,0,0],[0,0,0,1]])
         case "Hadamard":
             return Matrix([[vrt2,vrt2],[vrt2,-vrt2]])
         case "Pauli-X":
