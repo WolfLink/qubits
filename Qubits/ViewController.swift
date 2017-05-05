@@ -57,6 +57,7 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
         linker?.selectedPoint = CGPoint.zero
         simulator.invalidateCache()
         titleBar?.topItem?.title = "Needs Compiling"
+        linker?.setNeedsDisplay()
     }
     
     override func viewDidLayoutSubviews() {

@@ -43,8 +43,9 @@ class Quantum: NSObject {
             var step = Matrix([[ComplexNumber]]())
             var pass = [Int]()
             var processed = [CircuitLink]()
+            var skipFlag = false // a flag useful for handling implicit swaps
             for i in 0 ..< nodes.count {
-                if pass.contains(i) {
+                if pass.contains(i) || skipFlag {
                     continue
                 }
                 let n = nodes[i]
@@ -70,10 +71,71 @@ class Quantum: NSObject {
                         let friend = gate.inputs[1 - index] // this will give 1 if index==0 and 0 if index==1
                         if nodes.contains(friend.partner!) && !processed.contains(friend.partner!) {
                             // the other input is ready to apply the gate
-                            if index == 0 {
+                            let j: Int! = nodes.index(of: friend.partner!) // find the index of the other input
+                            if j - i == 2 {
+                                // implicit swaps for the special case where we only need one implicit swap
+                                step = step.tensor(matrixForID("Identity")).tensor(matrixForID("Swap"))
+                                let intermediate = nodes[j]
+                                nodes[j] = nodes[j-1]
+                                nodes[j-1] = intermediate
+                                if j + 2 <= nodes.count {
+                                    for _ in (j + 2)...nodes.count {
+                                        step = step.tensor(matrixForID("Identity"))
+                                    }
+                                }
+                                
+                                skipFlag = true // we have filled the rest of this step with identities so skip all the rest of the qubits
+                                continue
+                            }
+                            else if j - i > 2 {
+                                // implicit swaps for when we need a bunch of implicit swaps
+                                
+                                // start by adding identities until we need to swap
+                                let delta = j - i
+                                for _ in 2...delta {
+                                    step = step.tensor(matrixForID("Identity"))
+                                }
+                                step = step.tensor(matrixForID("Swap"))
+                                let intermediate = nodes[j]
+                                nodes[j] = nodes[j - 1]
+                                nodes[j-1] = intermediate
+                                if j + 2 <= nodes.count {
+                                    for _ in (j + 2)...nodes.count {
+                                        step = step.tensor(matrixForID("Identity"))
+                                    }
+                                }
+                                
+                                // now we repeat swapping as needed, but condense it into one step
+                                var beginingIdentities = Matrix([[ComplexNumber]]())
+                                for _ in 0...i {
+                                    beginingIdentities = beginingIdentities.tensor(matrixForID("Identity"))
+                                }
+                                for k in 3...delta {
+                                    var mat = beginingIdentities
+                                    if k != delta {
+                                        for _ in 1...(delta - k) {
+                                            mat = mat.tensor(matrixForID("Identity"))
+                                        }
+                                    }
+                                    mat = mat.tensor(matrixForID("Swap"))
+                                    let intermediate = nodes[i + delta - k + 1]
+                                    nodes[i + delta - k + 1] = nodes[i + delta - k + 2]
+                                    nodes[i + delta - k + 2] = intermediate
+                                    
+                                    for _ in (i + 4 + delta-k)...nodes.count {
+                                        mat = mat.tensor(matrixForID("Identity"))
+                                    }
+                                    
+                                    step = mat * step
+                                }
+                                
+                                
+                                skipFlag = true // we have filled the rest of this step with identities so skip all the rest of the qubits
+                                continue
+                            }
+                            else if index == 0 {
                                 // if the index of this qubit is 1, let the other responsible qubit be in charge
                                 // but if the index is 0, this qubit is in charge
-                                let j: Int! = nodes.index(of: friend.partner!)
                                 if j == i + 1 {
                                     // the nodes are in position so we don't have to worry about any swapping
                                     step = step.tensor(matrixForID(gate.ID))
@@ -86,7 +148,6 @@ class Quantum: NSObject {
                                 else if j == i - 1 {
                                     // the nodes are switched so we have to swap our gate
                                     let mat = matrixForID("Swap") * matrixForID(gate.ID) * matrixForID("Swap")
-                                    print(mat)
                                     step = step.tensor(mat)
                                     nodes[i] = gate.outputs[0]
                                     nodes[j] = gate.outputs[1]
@@ -95,7 +156,8 @@ class Quantum: NSObject {
                                     processed.append(nodes[j])
                                 }
                                 else {
-                                    NSLog("Implied swaps have not yet been implemented!")
+                                    NSLog("There was an implicit swap failure!")
+                                    return
                                 }
                             }
                         }
