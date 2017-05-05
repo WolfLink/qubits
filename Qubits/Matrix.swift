@@ -25,7 +25,7 @@ struct Matrix: CustomStringConvertible {
                     rowstr += "\(c)|\n"
                 }
                 else {
-                    rowstr += "\(c),"
+                    rowstr += "\(c)  "
                 }
             }
             str += rowstr

@@ -18,7 +18,7 @@ struct ComplexNumber: CustomStringConvertible {
             return "\(imaginary)i"
         }
         else {
-            return "\(real) + \(imaginary)i"
+            return imaginary >= 0 ? "\(real) + \(imaginary)i" : "\(real) - \(-imaginary)"
         }
     }
     
