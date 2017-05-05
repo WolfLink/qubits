@@ -23,6 +23,8 @@
 		6E704BE21E8DA4E800A1953C /* CircuitToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E704BE11E8DA4E800A1953C /* CircuitToolbar.swift */; };
 		6E704BE41E8DA62A00A1953C /* ComponentList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E704BE31E8DA62A00A1953C /* ComponentList.plist */; };
 		6E8374721EBCA396002B6A7A /* FileManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8374711EBCA396002B6A7A /* FileManagerViewController.swift */; };
+		6E8374761EBCFA71002B6A7A /* GHZ Game.q in Resources */ = {isa = PBXBuildFile; fileRef = 6E8374741EBCFA71002B6A7A /* GHZ Game.q */; };
+		6E8374771EBCFA71002B6A7A /* Basic Entanglement.q in Resources */ = {isa = PBXBuildFile; fileRef = 6E8374751EBCFA71002B6A7A /* Basic Entanglement.q */; };
 		6ED7BC4F1EB7CE08009CA442 /* CircuitLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7BC4E1EB7CE08009CA442 /* CircuitLink.swift */; };
 		6EEADFD21EB805090074023B /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEADFD11EB805090074023B /* Convenience.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +48,8 @@
 		6E704BE11E8DA4E800A1953C /* CircuitToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitToolbar.swift; sourceTree = "<group>"; };
 		6E704BE31E8DA62A00A1953C /* ComponentList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ComponentList.plist; sourceTree = "<group>"; };
 		6E8374711EBCA396002B6A7A /* FileManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerViewController.swift; sourceTree = "<group>"; };
+		6E8374741EBCFA71002B6A7A /* GHZ Game.q */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "GHZ Game.q"; sourceTree = "<group>"; };
+		6E8374751EBCFA71002B6A7A /* Basic Entanglement.q */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Basic Entanglement.q"; sourceTree = "<group>"; };
 		6ED7BC4E1EB7CE08009CA442 /* CircuitLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitLink.swift; sourceTree = "<group>"; };
 		6EEADFD11EB805090074023B /* Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Convenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +96,7 @@
 			children = (
 				6E0E70A01EB6756900BC8FC4 /* Math */,
 				6E3AA16E1E88B6A70059E628 /* Circuit GUI */,
+				6E8374731EBCF904002B6A7A /* Sample Circuits */,
 				6E3AA15A1E88B67B0059E628 /* AppDelegate.swift */,
 				6E3AA15C1E88B67B0059E628 /* ViewController.swift */,
 				6E8374711EBCA396002B6A7A /* FileManagerViewController.swift */,
@@ -117,6 +122,15 @@
 				6E581A851EB8AD5C00525382 /* Quantum.swift */,
 			);
 			name = "Circuit GUI";
+			sourceTree = "<group>";
+		};
+		6E8374731EBCF904002B6A7A /* Sample Circuits */ = {
+			isa = PBXGroup;
+			children = (
+				6E8374741EBCFA71002B6A7A /* GHZ Game.q */,
+				6E8374751EBCFA71002B6A7A /* Basic Entanglement.q */,
+			);
+			name = "Sample Circuits";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,7 +194,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E704BE41E8DA62A00A1953C /* ComponentList.plist in Resources */,
+				6E8374761EBCFA71002B6A7A /* GHZ Game.q in Resources */,
 				6E3AA1651E88B67B0059E628 /* LaunchScreen.storyboard in Resources */,
+				6E8374771EBCFA71002B6A7A /* Basic Entanglement.q in Resources */,
 				6E3AA1621E88B67B0059E628 /* Assets.xcassets in Resources */,
 				6E3AA1601E88B67B0059E628 /* Main.storyboard in Resources */,
 			);

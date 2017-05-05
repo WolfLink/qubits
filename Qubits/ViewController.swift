@@ -15,7 +15,14 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
     var blocks = [CircuitComponent]()
     let simulator: Quantum = Quantum()
     var circuitName: String?
+    var immutable = false
     var loadDict: NSDictionary?
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.autosave(notification:)), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+    }
     
     @IBAction func run() {
         // do the simulation on the background thread
@@ -62,8 +69,21 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
         linker?.setNeedsDisplay()
     }
     
+    @objc func autosave(notification _: NSNotification) {
+        if !immutable, let name = circuitName {
+            let dict = serializeToDictionary()
+            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let path = dir.appendingPathComponent(name + ".q")
+                dict.write(to: path, atomically: true)
+            }
+        }
+    }
+    
     @IBAction func back() {
-        if let name = circuitName {
+        if immutable {
+            dismiss(animated: true, completion: nil)
+        }
+        else if let name = circuitName {
             let dict = serializeToDictionary()
             if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 

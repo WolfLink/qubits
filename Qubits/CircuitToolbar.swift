@@ -37,7 +37,13 @@ class CircuitToolbar: UIView {
     func loadData() {
         scrollView.backgroundColor = UIColor.clear
         
-        if UIAccessibilityIsReduceTransparencyEnabled() {
+        self.backgroundColor = UIColor.clear
+        let decoration = UIToolbar(frame: self.bounds)
+        decoration.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(decoration)
+        sendSubview(toBack: decoration)
+        // I have changed my mind and am now using a blank UIToolbar to decorate the background
+        /*if UIAccessibilityIsReduceTransparencyEnabled() {
             self.backgroundColor = UIColor.darkGray
         }
         else {
@@ -48,7 +54,7 @@ class CircuitToolbar: UIView {
             blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             addSubview(blurView)
             sendSubview(toBack: blurView)
-        }
+        }*/
         
         let length = self.frame.height - 10
         scrollView.frame = CGRect(origin: CGPoint.zero, size: self.frame.size)
