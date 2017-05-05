@@ -94,9 +94,8 @@ class FileManagerViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let name = filenames![indexPath[1]]
         if indexPath.first == 0 {
-            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            if let name = filenames?[indexPath[1]], let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 
                 let path = dir.appendingPathComponent(name + ".q")
                 
@@ -108,11 +107,11 @@ class FileManagerViewController: UIViewController, UITableViewDataSource, UITabl
                 }
                 else {
                     NSLog("Could not read file \(name).q")
-                    tableView.deselectRow(at: indexPath, animated: true)
                 }
             }
         }
         else {
+            let name = sampleNames[indexPath[1]]
             if let path = Bundle.main.path(forResource: name, ofType: "q"), let dict = NSMutableDictionary(contentsOfFile: path) {
                 dict.setValue(name, forKey: "circuitName")
                 dict.setValue(true, forKey: "sample")
@@ -120,9 +119,9 @@ class FileManagerViewController: UIViewController, UITableViewDataSource, UITabl
             }
             else {
                 NSLog("Could not read sample circuit \(name)")
-                tableView.deselectRow(at: indexPath, animated: true)
             }
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 
