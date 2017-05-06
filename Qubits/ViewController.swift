@@ -119,7 +119,7 @@ class ViewController: UIViewController, CircuitComponentDelegate, CircuitLinkDel
                     self.back()
                 }
             })
-            let deleteAction = UIAlertAction(title: "Delete", style: UIAlertActionStyle.destructive, handler: {
+            let deleteAction = UIAlertAction(title: "Don't Save", style: UIAlertActionStyle.destructive, handler: {
                 alert -> Void in
                 
                 DispatchQueue.main.async {

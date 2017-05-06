@@ -207,7 +207,9 @@ class Quantum: NSObject {
             return Matrix([[ComplexNumber.zero, -ComplexNumber.i],[ComplexNumber.i,ComplexNumber.zero]])
         case "Pauli-Z":
             return Matrix([[1,0],[0,-1]])
-        case "Controlled Not":
+        case "Rotation of pi/8":
+            return Matrix([[ComplexNumber.one, ComplexNumber.zero], [ComplexNumber.zero, ComplexNumber(real: vrt2, imaginary: vrt2)]])
+        case "Controlled X":
             return Matrix([[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]])
         case "Controlled Y":
             // this is a long one so I am defining these constants for readability's sake
@@ -219,6 +221,12 @@ class Quantum: NSObject {
             return Matrix([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,-1]])
         case "Controlled Not":
             return Matrix([[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]])
+        case "Controlled Rotation of pi/8":
+            // another lone one
+            let c1 = ComplexNumber.one
+            let c0 = ComplexNumber.zero
+            let cp4 = ComplexNumber(real: vrt2, imaginary: vrt2)
+            return Matrix([[c1,c0,c0,c0],[c0,c1,c0,c0],[c0,c0,c1,c0],[c0,c0,c0,cp4]])
         default:
             NSLog("Unrecognized gate type \(ID)")
             return Matrix([[ComplexNumber]]())

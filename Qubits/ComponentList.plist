@@ -86,7 +86,17 @@
 		<key>type</key>
 		<string>gate</string>
 		<key>name</key>
-		<string>Controlled Not</string>
+		<string>Rotation of pi/8</string>
+		<key>label</key>
+		<string>R8</string>
+		<key>qubits</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>gate</string>
+		<key>name</key>
+		<string>Controlled X</string>
 		<key>label</key>
 		<string>CNOT</string>
 		<key>qubits</key>
@@ -108,7 +118,17 @@
 		<key>name</key>
 		<string>Controlled Z</string>
 		<key>label</key>
-		<string>CZ</string>
+		<string>CPHASE</string>
+		<key>qubits</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>gate</string>
+		<key>name</key>
+		<string>Controlled Rotation of pi/8</string>
+		<key>label</key>
+		<string>CR8</string>
 		<key>qubits</key>
 		<integer>2</integer>
 	</dict>

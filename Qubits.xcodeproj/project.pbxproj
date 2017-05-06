@@ -23,8 +23,10 @@
 		6E704BE41E8DA62A00A1953C /* ComponentList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E704BE31E8DA62A00A1953C /* ComponentList.plist */; };
 		6E8374721EBCA396002B6A7A /* FileManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8374711EBCA396002B6A7A /* FileManagerViewController.swift */; };
 		6E8374761EBCFA71002B6A7A /* GHZ Game.q in Resources */ = {isa = PBXBuildFile; fileRef = 6E8374741EBCFA71002B6A7A /* GHZ Game.q */; };
-		6E8374771EBCFA71002B6A7A /* Basic Entanglement.q in Resources */ = {isa = PBXBuildFile; fileRef = 6E8374751EBCFA71002B6A7A /* Basic Entanglement.q */; };
+		6E8374771EBCFA71002B6A7A /* Bell State.q in Resources */ = {isa = PBXBuildFile; fileRef = 6E8374751EBCFA71002B6A7A /* Bell State.q */; };
 		6ED7BC4F1EB7CE08009CA442 /* CircuitLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7BC4E1EB7CE08009CA442 /* CircuitLink.swift */; };
+		6EE15BFC1EBD4A1C00744099 /* Quantum Teleportation.q in Resources */ = {isa = PBXBuildFile; fileRef = 6EE15BFA1EBD4A1C00744099 /* Quantum Teleportation.q */; };
+		6EE15BFD1EBD4A1C00744099 /* Quantum Fourier Transform.q in Resources */ = {isa = PBXBuildFile; fileRef = 6EE15BFB1EBD4A1C00744099 /* Quantum Fourier Transform.q */; };
 		6EEADFD21EB805090074023B /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEADFD11EB805090074023B /* Convenience.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,8 +49,10 @@
 		6E704BE31E8DA62A00A1953C /* ComponentList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ComponentList.plist; sourceTree = "<group>"; };
 		6E8374711EBCA396002B6A7A /* FileManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerViewController.swift; sourceTree = "<group>"; };
 		6E8374741EBCFA71002B6A7A /* GHZ Game.q */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "GHZ Game.q"; sourceTree = "<group>"; };
-		6E8374751EBCFA71002B6A7A /* Basic Entanglement.q */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Basic Entanglement.q"; sourceTree = "<group>"; };
+		6E8374751EBCFA71002B6A7A /* Bell State.q */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Bell State.q"; sourceTree = "<group>"; };
 		6ED7BC4E1EB7CE08009CA442 /* CircuitLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitLink.swift; sourceTree = "<group>"; };
+		6EE15BFA1EBD4A1C00744099 /* Quantum Teleportation.q */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Quantum Teleportation.q"; sourceTree = "<group>"; };
+		6EE15BFB1EBD4A1C00744099 /* Quantum Fourier Transform.q */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Quantum Fourier Transform.q"; sourceTree = "<group>"; };
 		6EEADFD11EB805090074023B /* Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Convenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,8 +127,10 @@
 		6E8374731EBCF904002B6A7A /* Sample Circuits */ = {
 			isa = PBXGroup;
 			children = (
+				6EE15BFA1EBD4A1C00744099 /* Quantum Teleportation.q */,
+				6EE15BFB1EBD4A1C00744099 /* Quantum Fourier Transform.q */,
 				6E8374741EBCFA71002B6A7A /* GHZ Game.q */,
-				6E8374751EBCFA71002B6A7A /* Basic Entanglement.q */,
+				6E8374751EBCFA71002B6A7A /* Bell State.q */,
 			);
 			name = "Sample Circuits";
 			sourceTree = "<group>";
@@ -199,9 +205,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E704BE41E8DA62A00A1953C /* ComponentList.plist in Resources */,
+				6EE15BFC1EBD4A1C00744099 /* Quantum Teleportation.q in Resources */,
 				6E8374761EBCFA71002B6A7A /* GHZ Game.q in Resources */,
 				6E3AA1651E88B67B0059E628 /* LaunchScreen.storyboard in Resources */,
-				6E8374771EBCFA71002B6A7A /* Basic Entanglement.q in Resources */,
+				6E8374771EBCFA71002B6A7A /* Bell State.q in Resources */,
+				6EE15BFD1EBD4A1C00744099 /* Quantum Fourier Transform.q in Resources */,
 				6E3AA1621E88B67B0059E628 /* Assets.xcassets in Resources */,
 				6E3AA1601E88B67B0059E628 /* Main.storyboard in Resources */,
 			);
